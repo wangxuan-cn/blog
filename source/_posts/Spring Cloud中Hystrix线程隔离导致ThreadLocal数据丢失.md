@@ -236,7 +236,7 @@ private ThreadLocalMap(ThreadLocalMap parentMap) {
 到此为止，通过inheritableThreadLocals我们可以在父线程创建子线程的时候将Local中的值传递给子线程，这个特性已经能够满足大部分的需求了，但是还有一个很严重的问题是如果是在线程复用的情况下就会出问题，比如线程池中去使用inheritableThreadLocals 进行传值，因为inheritableThreadLocals 只是会再新创建线程的时候进行传值，线程复用并不会做这个操作，那么要解决这个问题就得自己去扩展线程类，实现这个功能。
 
 不要忘记我们是做Java的哈，开源的世界有你需要的任何东西，下面我给大家推荐一个实现好了的Java库，是阿里开源的transmittable-thread-local。  
-GitHub地址：https://github.com/alibaba/transmittable-thread-local 
+GitHub地址：https://github.com/alibaba/transmittable-thread-local
 
 主要功能就是解决在使用线程池等会缓存线程的组件情况下，提供ThreadLocal值的传递功能，解决异步执行时上下文传递的问题。
 
@@ -317,6 +317,6 @@ Dao:猿天地99
 ```
 到这里我们就已经可以完美的解决线程中，线程池中ThreadLocal数据的传递了，各位看官又疑惑了，标题不是讲的Spring Cloud中如何解决这个问题么，我也是在Zuul中发现这个问题的，解决方案已经告诉大家了，至于怎么解决Zuul中的这个问题就需要大家自己去思考了，后面有时间我再分享给大家。
 
-本文作者：尹吉欢
-原文链接：https://mp.weixin.qq.com/s/NxBLhGo6MzClGpQP9WXctA
+本文作者：尹吉欢  
+原文链接：https://mp.weixin.qq.com/s/NxBLhGo6MzClGpQP9WXctA  
 版权归作者所有，转载请注明出处
