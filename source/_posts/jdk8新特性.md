@@ -17,9 +17,9 @@ bussList.add(new Buss("b",30,3.2));
 bussList.add(new Buss("c",20,0.1));
 
 List<Buss> st = new ArrayList<>();
-bussList.stream().collect(Collectors.groupingBy(Buss::getName))//分组(Name can't be null)
+bussList.stream().collect(Collectors.groupingBy(Buss::getName)) //分组(Name can't be null)
 .forEach((k,v) -> {
-      Optional<Buss> sum = v.stream().reduce((v1,v2) -> {//合并
+      Optional<Buss> sum = v.stream().reduce((v1,v2) -> { //合并
           v1.setCount(v1.getCount() + v2.getCount());
           v1.setValue(v1.getValue() + v2.getValue());
           return v1;
