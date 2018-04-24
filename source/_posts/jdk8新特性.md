@@ -6,29 +6,30 @@ tags:
 categories:
     - jdk8
 ---
-# 1. stream
-## 1.1 stream分组合并
+# 1. stream  
+## 1.1 stream分组去重合并  
 ```
-List<Buss> bussList = new ArrayList<>();
-bussList.add(new Buss("a",10,0.3));
-bussList.add(new Buss("b",3,0.8));
-bussList.add(new Buss("c",5,2.0));
-bussList.add(new Buss("b",30,3.2));
-bussList.add(new Buss("c",20,0.1));
+public static void main(String[] args) {
+    List<Buss> bussList = new ArrayList<>();
+    bussList.add(new Buss("a",10,0.3));
+    bussList.add(new Buss("b",3,0.8));
+    bussList.add(new Buss("c",5,2.0));
+    bussList.add(new Buss("b",30,3.2));
+    bussList.add(new Buss("c",20,0.1));
 
-List<Buss> st = new ArrayList<>();
-bussList.stream().collect(Collectors.groupingBy(Buss::getName)) //分组(Name can't be null)
-.forEach((k,v) -> {
-      Optional<Buss> sum = v.stream().reduce((v1,v2) -> { //合并
-          v1.setCount(v1.getCount() + v2.getCount());
-          v1.setValue(v1.getValue() + v2.getValue());
-          return v1;
-      });
-      st.add(sum.orElse(new Buss("other",0,0.0)));
-});
+    List<Buss> st = new ArrayList<>();
+    bussList.stream().collect(Collectors.groupingBy(Buss::getName)) //分组(Name can't be null)
+    .forEach((k,v) -> {
+          Optional<Buss> sum = v.stream().reduce((v1,v2) -> { //合并
+              v1.setCount(v1.getCount() + v2.getCount());
+              v1.setValue(v1.getValue() + v2.getValue());
+              return v1;
+          });
+          st.add(sum.orElse(new Buss("other",0,0.0)));
+    });
 
-System.out.println(st);
-}
+    System.out.println(st);
+}    
 
 class Buss {
     private String name;
@@ -53,3 +54,56 @@ public String groupField() {
       return getName()+"-"+getValue();
 }
 ```
+
+## 1.2 stream分组去重求最大值
+List对象筛选学生年龄和性别一样的进行分组，并且挑选出身高最高的学生
+```
+public class Student {
+    private String name;
+    private int age;
+    private Long hight;
+    private int sex;
+
+    public Student(String name, int age, long hight, int sex) {
+        this.name = name;
+        this.age = age;
+        this.hight = hight;
+        this.sex = sex;
+    }
+    //省去相应get/set方法
+    //设置年龄和性别的拼接，得出相应分组
+    public Long getIwantStudent(){
+        return  Long.valueOf(this.sex + this.age);
+    }
+}
+
+public static void main(String[] args) {
+    List<Student> allList = new ArrayList<>();
+    allList.add(new Student("韩梅梅",20,178L,1));
+    allList.add(new Student("马冬梅",20,168L,1));
+    allList.add(new Student("李磊",21,179L,2));
+    allList.add(new Student("小李",21,189L,2));
+
+    //以年龄和性别分组，并选取最高身高的学生
+    Map<Long, Optional<Student>> allMapTask = allList.stream().collect(
+              Collectors.groupingBy(Student::getIwantStudent,
+              Collectors.maxBy((o1, o2) ->
+              o1.getHight().compareTo(o2.getHight()))));
+
+    //遍历获取对象信息
+    for (Map.Entry<Long,Optional<Student>> entry: allMapTask.entrySet()) {
+        Student student = entry.getValue().get();
+        System.out.println(student.toString());
+    }
+}
+```
+其中代码可以改写：
+```
+Map<Long, Optional<Student>> allMapTask = allList.stream().collect(
+          Collectors.groupingBy(Student::getIwantStudent,
+          Collectors.maxBy(Comparator.comparing(Student::getHight))));
+```
+**注意：  
+Collectors.groupingBy方法根据Student对象中方法作为分组条件  
+Collectors.maxBy方法筛选每个分组中符合条件的数据
+**
