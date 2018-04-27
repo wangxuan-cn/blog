@@ -2,11 +2,11 @@
 title: Mac上好用的工具
 date: 2018-03-01 12:50:40
 tags:
-    - Mac
     - 工具
+    - Mac
 categories:
-    - Mac
     - 工具
+    - Mac
 comments: true
 ---
 软件包管理工具：Homebrew -> <https://brew.sh/index_zh-cn.html>  
