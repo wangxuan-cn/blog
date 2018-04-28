@@ -1,5 +1,5 @@
 ---
-title: Mybatis报错集锦
+title: Mybatis异常集锦
 date: 2018-04-24 11:37:07
 tags:
     - MyBatis
