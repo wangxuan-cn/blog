@@ -6,23 +6,24 @@ tags:
 categories:
     - Dubbo
 ---
-# 服务消费方调用不到服务提供方
+# 消费者调用不到提供者
 可能的情况：  
-1）服务消费方和服务提供方配置的zookeeper不是同一个。各自检查各自的zookeeper配置的ip。  
-2）服务消费方和服务提供方之间网络不通，通过dubbo-admin管理平台看服务提供方ip,然后从服务消费方机器,ping ip地址，看网络是否通。  
-3）服务提供方没有注册到zookeeper，可通过dubbo-admin管理平台看状态。
+1）消费者和提供者配置的zookeeper不是同一个。各自检查各自的zookeeper配置的ip。  
+2）消费者和提供者之间网络不通，通过dubbo-admin管理平台看提供者ip,然后从消费者机器,ping ip地址，看网络是否通。  
+3）提供者没有注册到zookeeper，可通过dubbo-admin管理平台看状态。
 
-# 注册中心有多个服务提供方，服务消费方应该调用哪个？
-例如，张三和李四，都是服务提供方的开发人员，他们俩配置的都是开发环境的zk，且都注册成功了。王五是服务消费方的开发，他想调用张三开发的一个服务，结果调用的时候总是调用不到。这是因为zk分发的时候，把王五的调用分配给李四了。  
-这种情况，我们可以指定调用服务服务提供方。只需要做如下配置即可：
+# 注册中心有多个提供者，消费者应该调用哪个？
+例如，张三和李四，都是提供者的开发人员，他们俩配置的都是开发环境的zk，且都注册成功了。王五是消费者的开发，他想调用张三开发的一个服务，结果调用的时候总是调用不到。这是因为zk分发的时候，把王五的调用分配给李四了。  
+这种情况，我们可以指定调用服务提供者。只需要做如下配置即可：
 ```
-@Reference(check = false, version = "1.0", url = "dubbo://172.19.24.134:20928/com.suneee.scn.system.api.provider.UserProvider")
+@Reference(check = false, url = "dubbo://172.19.24.134:20928/com.suneee.scn.system.api.provider.UserProvider")
 private static UserProvider userProvider;
 ```
-这种配置仅供开发测试使用，上测试环境或生产环境的时候一定要删除。
+这种配置仅供开发测试使用，上测试环境或生产环境的时候一定要删除。  
+本机启动提供者向注册中心注册，指定URL的具体IP，可以用作本机debug调试。
 
-# 服务消费方调用不到已经注册了的服务提供方
-服务提供方已经注册到zookeeper的注册中心，但是没有正确引用。  
+# 消费者调用不到已经注册了的提供者
+提供者已经注册到zookeeper的注册中心，但是没有正确引用。  
 错误提示如下：
 ```
 No provider available in [invoker :interface com.suneee.scn.system.api.provider.UserProvider ->
@@ -37,13 +38,13 @@ se&default.reference.filter=default&default.timeout=16000&dubbo=2.8.6&interface=
 .015002-6&side=consumer&timestamp=1524879034209,directory: com.alibaba.dubbo.registry.integration.RegistryDirectory@38e7ed69]
 ```
 
-服务提供方在zookeeper的注册中心已经注册了，但是服务提供方加了版本号，服务提供方代码如下：
+提供者在zookeeper的注册中心已经注册了，但是提供者加了版本号，提供者代码如下：
 ```
 @Service(version="1.0")
 public class UserProviderImpl implements UserProvider {
 ```
 
-服务消费方引用代码如下：
+消费者引用代码如下：
 ```
 @Reference(check = false)
 private UserProvider userProvider;
@@ -56,8 +57,8 @@ private UserProvider userProvider;
 private UserProvider userProvider;
 ```
 
-# 服务提供方的方法没有注册
-服务消费方有的方法可以调用，有的不能调用出现：com.alibaba.dubbo.rpc.RpcException: Failed to invoke the method异常，由于服务提供方新加的方法并没有注册到zookeeper的注册中心导致的。  
+# 提供者的方法没有注册
+消费者有的方法可以调用，有的不能调用，出现：com.alibaba.dubbo.rpc.RpcException: Failed to invoke the method异常，由于提供者新加的方法并没有注册到zookeeper的注册中心导致的。  
 错误提示如下：
 ```
 com.alibaba.dubbo.rpc.RpcException: Failed to invoke the method getUserListInEnterprise in the service
@@ -80,9 +81,4 @@ registry://zookeeper.vr.weilian.cn:12233/com.alibaba.dubbo.registry.RegistryServ
 port=dubb
 ```
 
-如果拥有服务提供方的代码，包含了新加的代码，本机启动，向zookeeper的注册中心注册新加的方法，这样服务消费方就可以调用到新注册的方法。  
-引入服务消费方代码如下：  
-```
-@Reference(check = false, version = "1.0")
-private static UserProvider userProvider;
-```
+如果有提供者的代码，包含了新加方法的代码，本机启动，向zookeeper的注册中心注册新加的方法，消费者就可以调用到新注册的方法，这样只能作为本机调试！最终还是得让提供者重启服务向注册中心注册新加的方法！  
