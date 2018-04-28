@@ -1,5 +1,5 @@
 ---
-title: chrome命令
+title: Chrome命令
 date: 2018-03-29 17:11:07
 tags:
     - 浏览器
