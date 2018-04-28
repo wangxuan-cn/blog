@@ -6,7 +6,22 @@ tags:
 categories:
     - Dubbo
 ---
-# 没有引用到注册的服务提供方
+# 服务消费方调用不到服务提供方
+可能的情况：  
+1）服务消费方和服务提供方配置的zookeeper不是同一个。各自检查各自的zookeeper配置的ip。  
+2）服务消费方和服务提供方之间网络不通，通过dubbo-admin管理平台看服务提供方ip,然后从服务消费方机器,ping ip地址，看网络是否通。  
+3）服务提供方没有注册到zookeeper，可通过dubbo-admin管理平台看状态。
+
+# 注册中心有多个服务提供方，服务消费方应该调用哪个？
+例如，张三和李四，都是服务提供方的开发人员，他们俩配置的都是开发环境的zk，且都注册成功了。王五是服务消费方的开发，他想调用张三开发的一个服务，结果调用的时候总是调用不到。这是因为zk分发的时候，把王五的调用分配给李四了。  
+这种情况，我们可以指定调用服务服务提供方。只需要做如下配置即可：
+```
+@Reference(check = false, version = "1.0", url = "dubbo://172.19.24.134:20928/com.suneee.scn.system.api.provider.UserProvider")
+private static UserProvider userProvider;
+```
+这种配置仅供开发测试使用，上测试环境或生产环境的时候一定要删除。
+
+# 服务消费方调用不到已经注册了的服务提供方
 服务提供方已经注册到zookeeper的注册中心，但是没有正确引用。  
 错误提示如下：
 ```
@@ -65,9 +80,9 @@ registry://zookeeper.vr.weilian.cn:12233/com.alibaba.dubbo.registry.RegistryServ
 port=dubb
 ```
 
-如果拥有服务提供方的代码，包含了新加的代码，本机启动，向zookeeper的注册中心注册新加的方法，然后指定URL的地址。URL的地址可以是localhost、127.0.0.1或者本机IP地址。这种配置仅供开发测试使用，上测试环境或生产环境的时候一定要删除。  
+如果拥有服务提供方的代码，包含了新加的代码，本机启动，向zookeeper的注册中心注册新加的方法，这样服务消费方就可以调用到新注册的方法。  
 引入服务消费方代码如下：  
 ```
-@Reference(check = false, version = "1.0", url = "dubbo://172.19.24.134:20928/com.suneee.scn.system.api.provider.UserProvider")
+@Reference(check = false, version = "1.0")
 private static UserProvider userProvider;
 ```
