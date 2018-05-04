@@ -16,15 +16,11 @@ Ctrl-Shift-U 调出切换编码选项
 Ctrl-Shift-D 复制当前行到下一行  
 Ctrl-Shift-K 删除当前行
 
-# Atom常用插件
-minimap  
-让你了解当前屏幕所处相对位置，即右边的小预览条  
-https://atom.io/packages/minimap
+# Atom好用的插件
+* 主题   
+[atom-material-ui](https://atom.io/themes/atom-material-ui)  
+[atom-material-syntax](https://atom.io/themes/atom-material-syntax)
 
-markdown-preview  
-呈现的HTML标记显示在当前编辑器的右侧，即Markdown预览
-https://atom.io/packages/markdown-preview
-
-sublime-style-column-selection  
-列选择，也可通过快捷键Ctrl-Shift-Up,Ctrl-Shift-Down实现多列选择  
-https://atom.io/packages/Sublime-Style-Column-Selection
+* 美化  
+[minimap](https://atom.io/packages/minimap)  方便美观的缩略滚动图  
+[markdown-preview](https://atom.io/packages/markdown-preview)  Markdown预览
