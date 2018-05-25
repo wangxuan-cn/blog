@@ -43,8 +43,12 @@ dubbo在zookeeper注册中心的数据存储结构：
 /dubbo/com.suneee.scn.system.api.provider.UserProvider/consumers
 /dubbo/com.suneee.scn.system.api.provider.UserProvider/providers
 ```
-其中/dubbo/com.suneee.scn.system.api.provider.UserProvider/providers下级即是提供者的注册信息，如下：
+其中/dubbo/com.suneee.scn.system.api.provider.UserProvider/providers下级即是提供者的注册信息，如下：  
+```
 dubbo%3A%2F%2F172.16.36.67%3A21117%2Fcom.suneee.scn.system.api.provider.UserProvider%3Fanyhost%3Dtrue%26application%3Dsystem-provider%26dubbo%3D1.0.0-SNAPSHOT%26generic%3Dfalse%26interface%3Dcom.suneee.scn.system.api.provider.UserProvider%26methods%3DfindUserInfo%2CfindByRole%2CfindById%2CgetUserByParam%26owner%3DsunEeeSystem%26pid%3D44275%26revision%3D1.0.0-SNAPSHOT%26serialization%3Dkryo%26server%3Dnetty4%26side%3Dprovider%26timestamp%3D1524825191422%26version%3D1.0
+```
 将UTF-8转中文后：  
-dubbo://172.16.36.67:21117/com.suneee.scn.system.api.provider.UserProvider?anyhost=true&application=system-provider&dubbo=1.0.0-SNAPSHOT&generic=false&interface=com.suneee.scn.system.api.provider.UserProvider&methods=findUserInfo,findByRole,findById,getUserByParam&owner=sunEeeSystem&pid=44275&revision=1.0.0-SNAPSHOT&serialization=kryo&server=netty4&side=provider&timestamp=1524825191422&version=1.0  
-分析可知，这些信息包含提供者的IP地址、端口号、注册方法、系列化的实现
+```
+dubbo://172.16.36.67:21117/com.suneee.scn.system.api.provider.UserProvider?anyhost=true&application=system-provider&dubbo=1.0.0-SNAPSHOT&generic=false&interface=com.suneee.scn.system.api.provider.UserProvider&methods=findUserInfo,findByRole,findById,getUserByParam&owner=sunEeeSystem&pid=44275&revision=1.0.0-SNAPSHOT&serialization=kryo&server=netty4&side=provider&timestamp=1524825191422&version=1.0
+```
+分析可知，这些信息包含提供者的IP地址、端口号、注册方法、系列化的实现等等
