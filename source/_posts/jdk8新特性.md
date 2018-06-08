@@ -6,8 +6,8 @@ tags:
 categories:
     - jdk8
 ---
-# 1. stream  
-## 1.1 stream分组去重合并  
+# stream  
+## stream分组去重合并  
 ```
 public static void main(String[] args) {
     List<Buss> bussList = new ArrayList<>();
@@ -55,7 +55,7 @@ public String groupField() {
 }
 ```
 
-## 1.2 stream分组去重求最大值
+## stream分组去重求最大值
 List对象筛选学生年龄和性别一样的进行分组，并且挑选出身高最高的学生
 ```
 public class Student {
@@ -105,5 +105,25 @@ Map<Long, Optional<Student>> allMapTask = allList.stream().collect(
 ```
 **注意：  
 Collectors.groupingBy方法根据Student对象中方法作为分组条件  
-Collectors.maxBy方法筛选每个分组中符合条件的数据
-**
+Collectors.maxBy方法筛选每个分组中符合条件的数据**
+
+## Java8的foreach()中使用return,不能使用break/continue
+使用foreach()处理集合时不能使用break和continue这两个方法，也就是说不能按照普通的for循环遍历集合时那样根据条件来中止遍历，而如果要实现在普通for循环中的效果时，可以使用return来达到，也就是说如果你在一个方法的lambda表达式中使用return时，这个方法是不会返回的，而只是执行下一次遍历。  
+代码：
+```
+List<String> list = Arrays.asList("123", "45634", "7892", "abch", "sdfhrthj", "mvkd");  
+list.stream().forEach(e ->{  
+    if(e.length() >= 5){  
+        return;  
+    }  
+    System.out.println(e);  
+});
+```
+输出：
+```
+123
+7892
+abch
+mvkd
+```
+**return起到的作用和continue是相同的**
