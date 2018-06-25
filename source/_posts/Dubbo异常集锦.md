@@ -81,3 +81,7 @@ port=dubb
 ```
 
 如果有提供者的代码，包含了新加方法的代码，本机启动，向zookeeper的注册中心注册新加的方法，消费者就可以调用到新注册的方法，这样只能作为本机调试！最终还是得让提供者重启服务向注册中心注册新加的方法！  
+
+# Dubbox的kyro系列化不支持JDK8新功能LocalDateTime、LocalDate、LocalTime
+Dubbox不同于Dubbo，Dubbox是当当网在Dubbo的基础上进行的扩展，其中一项扩展是支持kyro系列化。  
+当Consumer调用Provider的时候，参数Bean的属性类型如果包含LocalDateTime、LocalDate、LocalTime将产生超时，需要将这些类型转换成Date。其中Dubbox的版本是2.8.6，希望Dubbox的以后版本能解决这个问题！
