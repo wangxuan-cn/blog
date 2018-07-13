@@ -6,8 +6,8 @@ tags:
 categories:
     - jdk8
 ---
-# stream  
-## stream分组去重合并  
+# stream
+## stream分组去重合并 
 ```
 public static void main(String[] args) {
     List<Buss> bussList = new ArrayList<>();
@@ -106,6 +106,31 @@ Map<Long, Optional<Student>> allMapTask = allList.stream().collect(
 **注意：  
 Collectors.groupingBy方法根据Student对象中方法作为分组条件  
 Collectors.maxBy方法筛选每个分组中符合条件的数据**
+
+## stream分组
+思考一下Employee对象流，每个对象对应一个名字、城市和销售数量，如下表所示：
+```
++----------+------------+-----------------+
+| Name     | City       | Number of Sales |
++----------+------------+-----------------+
+| Alice    | London     | 200             |
+| Bob      | London     | 150             |
+| Charles  | New York   | 160             |
+| Dorothy  | Hong Kong  | 190             |
++----------+------------+-----------------+
+```
+在Java8中，你可以使用groupingBy收集器，像这样：
+`Map<String, List<Employee>> map = employees.stream().collect(groupingBy(Employee::getCity));`
+结果如下面的map所示：
+`{New York=[Charles], Hong Kong=[Dorothy], London=[Alice, Bob]}`
+还可以计算每个城市中雇员的数量，只需传递一个计数收集器给groupingBy收集器。第二个收集器的作用是在流分类的同一个组中对每个元素进行递归操作。
+`Map<String, Long> map = employees.stream().collect(groupingBy(Employee::getCity, counting()));`
+结果如下面的map所示：
+`{New York=1, Hong Kong=1, London=2}`
+另一个例子是计算每个城市的平均销售，这可以联合使用averagingInt和groupingBy 收集器：
+`Map<String, Double> map = employees.stream().collect(groupingBy(Employee::getCity, averagingInt(Employee::getNumSales)));`
+结果如下map所示：
+`{New York=160.0, Hong Kong=190.0, London=175.0}`
 
 ## Java8的foreach()中使用return,不能使用break/continue
 使用foreach()处理集合时不能使用break和continue这两个方法，也就是说不能按照普通的for循环遍历集合时那样根据条件来中止遍历，而如果要实现在普通for循环中的效果时，可以使用return来达到，也就是说如果你在一个方法的lambda表达式中使用return时，这个方法是不会返回的，而只是执行下一次遍历。  
