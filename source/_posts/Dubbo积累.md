@@ -27,6 +27,9 @@ public class ZooKeeperClientTest {
             System.out.println("stringList=" + stringList);
             byte[] data = zooKeeper.getData(PATH, false, new Stat());
             System.out.println(data);
+            if (data != null) {
+                System.out.println(new String(data));
+            }
         } catch (IOException | InterruptedException | KeeperException e) {
             e.printStackTrace();
         }
