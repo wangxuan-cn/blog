@@ -32,8 +32,8 @@ LIKE '%a%',A是不会出来的
 在postgresql中，创建数据库时会自动创建public模式，一般我们把表都保存在该模式中，因此直接删除该模式再重新创建该模式。  
 若数据在其他模式中，则把public换为数据表所在模式即可。
 ```
-//删除public模式以及模式里面所有的对象
+-- 删除public模式以及模式里面所有的对象
 DROP SCHEMA public CASCADE;
-//创建public模式
+-- 创建public模式
 CREATE SCHEMA public;
 ```
