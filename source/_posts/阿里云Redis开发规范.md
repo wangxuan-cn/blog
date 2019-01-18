@@ -3,7 +3,6 @@ title: 阿里云Redis开发规范
 date: 2018-04-13 13:27:01
 tags:
     - Redis
-    - 缓存
 categories:
     - Redis
 ---
@@ -40,7 +39,7 @@ categories:
     ```
 
 ## 3.【推荐】：控制key的生命周期，redis不是垃圾桶
-建议使用expire设置过期时间(条件允许可以打散过期时间，防止集中过期)，不过期的数据重点关注idletime。 
+建议使用expire设置过期时间(条件允许可以打散过期时间，防止集中过期)，不过期的数据重点关注idletime。
 
 # 二、命令使用
 

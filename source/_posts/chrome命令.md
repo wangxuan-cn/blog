@@ -2,11 +2,9 @@
 title: Chrome命令
 date: 2018-03-29 17:11:07
 tags:
-    - 浏览器
-    - Chrome
+    - 工具
 categories:
-    - 浏览器
-    - Chrome
+    - 工具
 ---
 ###### 非常有用的chrome://命令  
 - chrome://downloads 等同于从菜单中查看下载内容，其快捷键是Ctrl+J  

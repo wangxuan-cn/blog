@@ -2,7 +2,6 @@
 title: PostgreSQL使用总结
 date: 2018-05-15 19:07:40
 tags:
-    - 数据库
     - PostgreSQL
 categories:
     - 数据库

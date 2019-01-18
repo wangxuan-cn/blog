@@ -2,9 +2,10 @@
 title: List接口的方法subList的使用注意事项
 date: 2018-03-31 16:29:49
 tags:
+    - Java基础
     - 集合
-    - 面试题
 categories:
+    - Java基础
     - 集合
 ---
 JDK中，List接口有一个实例方法List<E> subList(int fromIndex, int toIndex)，其作用是返回一个以fromIndex为起始索引（包含），以toIndex为终止索引（不包含）的子列表（List）。  

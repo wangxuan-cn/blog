@@ -1,13 +1,14 @@
 ---
-title: jdk8新特性
+title: Jdk8新特性
 date: 2018-04-24 16:07:29
 tags:
-    - jdk8
+    - Java基础
 categories:
-    - jdk8
+    - Java基础
+    - Jdk8
 ---
 # stream
-## stream分组去重合并 
+## stream分组去重合并
 ```
 public static void main(String[] args) {
     List<Buss> bussList = new ArrayList<>();

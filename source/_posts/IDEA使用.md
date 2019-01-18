@@ -3,10 +3,8 @@ title: IDEA使用
 date: 2018-05-25 09:48:21
 tags:
     - 工具
-    - IDEA
 categories:
     - 工具
-    - IDEA
 ---
 # IDEA好用的插件
 [IDEA官方插件库网址](https://plugins.jetbrains.com/)  
