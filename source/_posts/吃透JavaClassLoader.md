@@ -34,7 +34,7 @@ JVM运行实例中会存在多个ClassLoader，不同的ClassLoader会从不同�
 
 JVM中内置了三个重要的ClassLoader，分别是BootstrapClassLoader、ExtensionClassLoader和AppClassLoader。
 
-BootstrapClassLoader负责加载JVM运行时核心类，这些类位于$JAVA_HOME/lib/rt.jar文件中，我们常用内置库 java.xxx.* 都在里面，比如java.util.\*、java.io.\*、java.nio.\*、java.lang.\*等等。这个ClassLoader 比较特殊，它是由C代码实现的，我们将它称之为「根加载器」。
+BootstrapClassLoader负责加载JVM运行时核心类，这些类位于$JAVA_HOME/lib/rt.jar文件中，我们常用内置库 java.xxx.\*都在里面，比如java.util.\*、java.io.\*、java.nio.\*、java.lang.\*等等。这个ClassLoader 比较特殊，它是由C代码实现的，我们将它称之为「根加载器」。
 
 ExtensionClassLoader负责加载JVM扩展类，比如swing系列、内置的js引擎、xml解析器等等，这些库名通常以javax开头，它们的jar包位于$JAVA_HOME/lib/ext/\*.jar中，有很多jar包。
 
@@ -55,7 +55,7 @@ AppClassLoader可以由ClassLoader类提供的静态方法getSystemClassLoader()
 
 AppClassLoader在加载一个未知的类名时，它并不是立即去搜寻Classpath，它会首先将这个类名称交给 ExtensionClassLoader来加载，如果ExtensionClassLoader可以加载，那么AppClassLoader就不用麻烦了。否则它就会搜索Classpath 。
 
-而ExtensionClassLoader在加载一个未知的类名时，它也并不是立即搜寻ext路径，它会首先将类名称交给 BootstrapClassLoader来加载，如果BootstrapClassLoader可以加载，那么ExtensionClassLoader也就不用麻烦了。否则它就会搜索ext路径下的jar包。
+而ExtensionClassLoader在加载一个未知的类名时，它也并不是立即搜寻ext路径，它会首先将类名称交给BootstrapClassLoader来加载，如果BootstrapClassLoader可以加载，那么ExtensionClassLoader也就不用麻烦了。否则它就会搜索ext路径下的jar包。
 
 这三个ClassLoader之间形成了级联的父子关系，每个ClassLoader都很懒，尽量把工作交给父亲做，父亲干不了了自己才会干。每个ClassLoader对象内部都会有一个parent属性指向它的父加载器。
 
@@ -226,8 +226,7 @@ IPrint depv1 = (IPrint)depv1Class.getConstructor().newInstance();
 depv1.print()
 ```
 
-ClassLoader固然可以解决依赖冲突问题，不过它也限制了不同软件包的操作界面必须使用反射或接口的方式进行动态调用。Maven没有这种限制，它依赖于虚拟机的默认懒惰加载策略，运行过程中如果没有显示使用定制的ClassLoader，那么从头到尾都是在使用AppClassLoader，而不同版本的同名类必须使用不同的ClassLoader加载，所以Maven不能完美解决钻石依赖。
-如果你想知道有没有开源的包管理工具可以解决钻石依赖的，我推荐你了解一下sofa-ark，它是蚂蚁金服开源的轻量级类隔离框架。
+ClassLoader固然可以解决依赖冲突问题，不过它也限制了不同软件包的操作界面必须使用反射或接口的方式进行动态调用。Maven没有这种限制，它依赖于虚拟机的默认懒惰加载策略，运行过程中如果没有显示使用定制的ClassLoader，那么从头到尾都是在使用AppClassLoader，而不同版本的同名类必须使用不同的ClassLoader加载，所以Maven不能完美解决钻石依赖。如果你想知道有没有开源的包管理工具可以解决钻石依赖的，我推荐你了解一下sofa-ark，它是蚂蚁金服开源的轻量级类隔离框架。
 
 # 分工与合作
 这里我们重新理解一下ClassLoader的意义，它相当于类的命名空间，起到了类隔离的作用。位于同一个ClassLoader 里面的类名是唯一的，不同的ClassLoader可以持有同名的类。ClassLoader是类名称的容器，是类的沙箱。
