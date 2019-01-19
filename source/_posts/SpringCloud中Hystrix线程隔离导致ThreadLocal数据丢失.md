@@ -9,10 +9,6 @@ categories:
     - Java基础
     - 多线程
 ---
-本文作者：尹吉欢  
-原文链接：https://mp.weixin.qq.com/s/NxBLhGo6MzClGpQP9WXctA  
-版权归作者所有，转载请注明出处
-
 在Spring Cloud中我们用Hystrix来实现断路器，Zuul中默认是用信号量（Hystrix默认是线程）来进行隔离的，我们可以通过配置使用线程方式隔离。  
 
 在使用线程隔离的时候，有个问题是必须要解决的，那就是在某些业务场景下通过ThreadLocal来在线程里传递数据，用信号量是没问题的，从请求进来，但后续的流程都是通一个线程。  
@@ -321,3 +317,6 @@ Dao:猿天地98
 Dao:猿天地99
 ```
 到这里我们就已经可以完美的解决线程中，线程池中ThreadLocal数据的传递了，各位看官又疑惑了，标题不是讲的Spring Cloud中如何解决这个问题么，我也是在Zuul中发现这个问题的，解决方案已经告诉大家了，至于怎么解决Zuul中的这个问题就需要大家自己去思考了，后面有时间我再分享给大家。
+
+本文作者：尹吉欢  
+原文链接：https://mp.weixin.qq.com/s/NxBLhGo6MzClGpQP9WXctA  
