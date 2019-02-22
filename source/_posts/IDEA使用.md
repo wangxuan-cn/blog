@@ -23,5 +23,5 @@ IDEA安装插件后，Settings->Plugins下选择某个插件，可查看功能�
 阿里巴巴云部署，可用作ssh连接工具
 - SequenceDiagram  
 根据代码生成时序图
-- Key promoter  
+- Key Promoter X | Key Promoter  
 适合新手使用。当你点击鼠标一个功能的时候，可以提示你这个功能快捷键是什么。
