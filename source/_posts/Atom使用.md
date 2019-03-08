@@ -12,6 +12,7 @@ Ctrl-J | Cmd-J 将下一行与当前行合并
 Ctrl-Up/Down | Ctrl-Cmd-Up/Down 选中行上移、下移  
 Ctrl-Shift-D | Cmd-Shift-D 复制当前行到下一行  
 Ctrl-Shift-K | Ctrl-Shift-K 删除当前行  
+Ctrl-Shift-L | 选择文本类型  
 Ctrl-Alt-B 插件atom-beautify的快捷键，需要安装，格式化代码  
 Ctrl-Shift-M 自带插件markdown-preview或插件Markdown Preview Plus的快捷键，Markdown预览  
 
