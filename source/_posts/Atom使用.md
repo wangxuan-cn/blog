@@ -9,6 +9,7 @@ categories:
 # Atom常用快捷键
 Ctrl-\ | Cmd-\ 显示或隐藏目录树  
 Ctrl-J | Cmd-J 将下一行与当前行合并  
+Ctrl-Shift-P | Cmd-Shift-P 	打开命令菜单  
 Ctrl-Up/Down | Ctrl-Cmd-Up/Down 选中行上移、下移  
 Ctrl-Shift-D | Cmd-Shift-D 复制当前行到下一行  
 Ctrl-Shift-K | Ctrl-Shift-K 删除当前行  
@@ -22,6 +23,9 @@ Ctrl-Shift-M 自带插件markdown-preview或插件Markdown Preview Plus的快捷
 
 # Atom好用的插件(Packages)
 插件相关使用方法可以查看插件官方介绍，通过File->Setting->Packages，查找相关插件可进入插件官方网址。
+- sync-settings  
+Atom的备份神器，可将配置信息自动备份到gist。  
+打开命令菜单，sync-settings:check-backup同步gist上配置到本地，sync-settings:backup同步配置到gist。
 - markdown-preview  
 自带插件，Markdown预览
 - Markdown Preview Plus  
