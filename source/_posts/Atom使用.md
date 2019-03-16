@@ -16,20 +16,27 @@ Ctrl-Shift-L | 选择文本类型
 Ctrl-Alt-B 插件atom-beautify的快捷键，需要安装，格式化代码  
 Ctrl-Shift-M 自带插件markdown-preview或插件Markdown Preview Plus的快捷键，Markdown预览  
 
-# Atom好用的主题(Themes)   
+# Atom好用的主题(Themes) 
 - atom-material-ui
 - atom-material-syntax
 
 # Atom好用的插件(Packages)
 插件相关使用方法可以查看插件官方介绍，通过File->Setting->Packages，查找相关插件可进入插件官方网址。
-- markdown-preview   
-自带插件，Markdown预览  
+- markdown-preview  
+自带插件，Markdown预览
 - Markdown Preview Plus  
 Markdown预览插件
-- Language Markdown   
+- Language Markdown  
 Markdown语法支持插件  
 - atom-beautify  
 格式化代码，快捷键Ctrl-Alt-B
+- linter  
+linter是一语法检查插件，它可以识别大部分语法，并对你的语法错误进行纠正。linter只是一个框架，针对不同语言的有不同具体插件。  
+linter针对不同语言的包：
+  - linter-htmlhint  html
+  - linter-markdown  markdown
+  - linter-jsonlint  json
+  - linter-jshint    js
 - platformio-ide-terminal  
 控制台，底部状态栏或者快捷键ctrl-\`打开
 - git-plus  
